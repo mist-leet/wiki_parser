@@ -12,7 +12,6 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-
 using System.Net;
 using System.IO;
 using System.Threading.Tasks;
@@ -25,34 +24,34 @@ namespace wiki_parser
         public MainWindow()
         {
             InitializeComponent();
-
-            const int n = 4;
-            string[] url = {
-                "https://en.wikipedia.org/wiki/Saint_Petersburg",
-                "https://en.wikipedia.org/wiki/Moscow",
-                "https://en.wikipedia.org/wiki/Perm",
-                "https://en.wikipedia.org/wiki/Omsk"
-            };
-
-            TextBlock[] var = {
+            const string path = "url.txt";
+            string[] url;
+            try
+            {
+                url = ParserUrl.urls(path);
+                TextBlock[] var = {
                 var_0, var_1, var_2, var_3
             };
-                        
-            Parser parser_img = new Parser(new ParserImg());
-            Parser parser_title = new Parser(new ParserTitle());
 
-            
-            WikiData[] data = new WikiData[4];
+                Parser parser_img = new Parser(new ParserImg());
+                Parser parser_title = new Parser(new ParserTitle());
+                WikiData[] data = new WikiData[var.Length];
 
-            for(int i = 0; i < n; i++)
-            {
-                data[i] = new WikiData(
-                    parser_title.Parse(url[i]),
-                    parser_img.Parse(url[i])
-                    );
+                for (int i = 0; i < var.Length; i++)
+                {
+                    data[i] = new WikiData(
+                        parser_title.Parse(url[i]),
+                        parser_img.Parse(url[i])
+                        );
+                }
+
+                UiInit ui = new UiInit(var, image, data);
             }
-
-            UiInit ui = new UiInit(var, image, data);
+            catch (FormatException e)
+            {
+                MessageBox.Show(e.Message);
+                Close();
+            }
         }
 
 
