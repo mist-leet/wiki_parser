@@ -20,7 +20,7 @@ namespace wiki_parser
         }
         public WikiData GetData(string url)
         {
-            WebRequest req = WebRequest.Create("https://en.wikipedia.org/wiki/Saint_Petersburg");
+            WebRequest req = WebRequest.Create(url);
             WebResponse res = req.GetResponse();
 
             string img = "";

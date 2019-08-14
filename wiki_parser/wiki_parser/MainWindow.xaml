@@ -6,15 +6,32 @@
         xmlns:local="clr-namespace:wiki_parser"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
-    <Grid>
+   
+    <Grid x:Name="MainGrid" ShowGridLines="True">
         <Grid.RowDefinitions>
-            <RowDefinition Height="4*"/>
+            <RowDefinition Height="2.5*"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <Image x:Name="image" Grid.Row="0"/>
-        <TextBlock x:Name="main" Grid.Row="1"
-                FontSize="20"  TextAlignment="Center"/>
+        <Grid x:Name="ImgGrid" Grid.Row="0" ShowGridLines="True">
+            <Image x:Name="image"/>
+        </Grid>
 
+
+        <Grid x:Name="TitleGrid" Grid.Row="1" ShowGridLines="True">
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+
+            <TextBlock x:Name="var_0" Grid.Row="0" Grid.Column="0"/>
+            <TextBlock x:Name="var_1" Grid.Row="0" Grid.Column="1"/>
+            <TextBlock x:Name="var_2" Grid.Row="1" Grid.Column="0"/>
+            <TextBlock x:Name="var_3" Grid.Row="1" Grid.Column="1"/>
+        </Grid>
     </Grid>
 </Window>

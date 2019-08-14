@@ -15,9 +15,10 @@ namespace wiki_parser
             title = a;
             img_url = b;
         }
-        public WikiData(string a)
+        public WikiData(WikiData a, WikiData b)
         {
-
+            title = a.title;
+            img_url = b.img_url;
         }
     }
 }

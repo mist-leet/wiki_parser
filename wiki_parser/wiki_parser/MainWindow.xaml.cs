@@ -25,24 +25,32 @@ namespace wiki_parser
         public MainWindow()
         {
             InitializeComponent();
-            string url = "https://en.wikipedia.org/wiki/Saint_Petersburg";
-            WebClient wclient = new WebClient();
 
+            const int n = 4;
+            string[] url = {
+                "https://en.wikipedia.org/wiki/Saint_Petersburg",
+                "https://en.wikipedia.org/wiki/Moscow",
+                "https://en.wikipedia.org/wiki/Perm",
+                "https://en.wikipedia.org/wiki/Omsk"
+            };
+
+            TextBlock[] var = {
+                var_0, var_1, var_2, var_3
+            };
+                        
             Parser parser_img = new Parser(new ParserImg());
             Parser parser_title = new Parser(new ParserTitle());
+            WikiData[] data = new WikiData[4];
 
-            WikiData data = new WikiData(
-                parser_img.Parse(url),
-                parser_title.Parse(url)
-                );
-            
-            wclient.DownloadFile(data.img_url, "img.png");
-            main.Text = data.title;
-             
-            BitmapImage bm = new BitmapImage(new Uri("img.png", UriKind.Relative));
-            bm.Freeze();
-            image.Source = bm;
-            image.Stretch = Stretch.Uniform;
+            for(int i = 0; i < n; i++)
+            {
+                data[i] = new WikiData(
+                    parser_title.Parse(url[i]),
+                    parser_img.Parse(url[i])
+                    );
+            }
+
+            UiInit ui = new UiInit(var, image, data);
         }
 
 
