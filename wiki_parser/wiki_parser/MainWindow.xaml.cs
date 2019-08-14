@@ -40,6 +40,8 @@ namespace wiki_parser
                         
             Parser parser_img = new Parser(new ParserImg());
             Parser parser_title = new Parser(new ParserTitle());
+
+            
             WikiData[] data = new WikiData[4];
 
             for(int i = 0; i < n; i++)

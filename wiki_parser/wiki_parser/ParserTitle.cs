@@ -11,7 +11,11 @@ namespace wiki_parser
             int start = s.IndexOf("<title>") + 7;
             int end = s.IndexOf("</title>");
             if (end > 0)
-                return s.Substring(start, end - start);
+            {
+                s = s.Substring(start, end - start);
+                int start_1 = s.IndexOf(" - Wikipedia");
+                return s.Substring(0, start_1);
+            }
             else
                 return null;
         }
