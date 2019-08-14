@@ -19,67 +19,30 @@ using System.Threading.Tasks;
 
 namespace wiki_parser
 {
-    // https://en.wikipedia.org/wiki/Saint_Petersburg
-    // <title>Saint Petersburg - Wikipedia</title>
-
     public partial class MainWindow : Window
     {
-        private string FindName(string s)
-        {
-            int start = s.IndexOf("<title>") + 7;
-            int end = s.IndexOf("</title>");
-            if (end > 0)
-                return s.Substring(start, end - start);
-            else
-                return null;
-        }
 
-        private string FindPic(string s)
-        {
-            int start = s.IndexOf("https://upload.wikimedia.org/");
-            if (start > 0)
-            {
-                int i;
-                for (i = start; s[i] != '\"'; i++) ;
-                return s.Substring(start, i - start);
-            }
-            else
-                return null;
-        }
         public MainWindow()
         {
             InitializeComponent();
-            
-            WebRequest req = WebRequest.Create("https://en.wikipedia.org/wiki/Saint_Petersburg");
-            WebResponse res = req.GetResponse();
-
+            string url = "https://en.wikipedia.org/wiki/Saint_Petersburg";
             WebClient wclient = new WebClient();
 
-            string title = "";
-            string img = "";
-            
-            
-            using (Stream stream = res.GetResponseStream())
-            {
-                using (StreamReader reader = new StreamReader(stream))
-                {
-                    string line = "";
-                    while ((line = reader.ReadLine()) != null
-                        && (title == "" || img == ""))
-                    {
-                        if (FindName(line) != null && title == "")
-                            title = FindName(line);
-                        if (FindPic(line) != null && img == "")
-                            img = FindPic(line);
-                    }
-                }
-                wclient.DownloadFile(img, "img.png");
-            }
+            Parser parser_img = new Parser(new ParserImg());
+            Parser parser_title = new Parser(new ParserTitle());
 
-            main.Text = title;
+            WikiData data = new WikiData(
+                parser_img.Parse(url),
+                parser_title.Parse(url)
+                );
+            
+            wclient.DownloadFile(data.img_url, "img.png");
+            main.Text = data.title;
+             
             BitmapImage bm = new BitmapImage(new Uri("img.png", UriKind.Relative));
+            bm.Freeze();
             image.Source = bm;
-
+            image.Stretch = Stretch.Uniform;
         }
 
 
