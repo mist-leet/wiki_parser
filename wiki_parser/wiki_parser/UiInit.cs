@@ -22,10 +22,18 @@ namespace wiki_parser
     class UiInit
     {
         private const int n = 4;
-        public UiInit(TextBlock[] var, Image image, WikiData[] data)
+        // Number of questions 
+        private const int var_n = 20;
+
+        private int[] right_ans = new int[var_n];
+
+        public UiInit(TextBlock[] var, Image image, WikiData[] data, string[] urls)
         {
+            RightAnsInit();
+
             SetVars(var, data);
-            SetImg(image, data, 3);
+            SetImg(image, data, new Random().Next(0, 4));
+            MakeParsedUrlList(urls);
         }
 
         private void SetVars(TextBlock[] var, WikiData[] data)
@@ -44,6 +52,19 @@ namespace wiki_parser
             bm.Freeze();
             img.Source = bm;
             img.Stretch = Stretch.Uniform;
+        }
+        private static void MakeParsedUrlList(string[] urls)
+        {
+            using (StreamWriter writer = new StreamWriter("urllist.txt"))
+            {
+                foreach (string line in urls)
+                    writer.WriteLine(line);
+            }
+        }
+        private void RightAnsInit()
+        {
+            for (int i = 0; i < var_n; i++)
+                right_ans[i] = new Random().Next(0, 4);
         }
     }
 }

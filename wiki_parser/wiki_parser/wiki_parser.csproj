@@ -55,6 +55,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="ParserUrl.cs" />
+    <Compile Include="ParserUrlList.cs" />
     <Compile Include="UiInit.cs" />
     <Compile Include="WikiData.cs" />
     <Page Include="MainWindow.xaml">

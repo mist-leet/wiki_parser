@@ -1,8 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Net;
+using System.IO;
+
 
 namespace wiki_parser
 {
@@ -15,9 +14,10 @@ namespace wiki_parser
             _setting = setting;
         }
         
-        public WikiData Parse(string url)
+        public string[] Parse(string url)
         {
-             return _setting.GetData(url);
+            return _setting.GetData(url);
         }
+
     }
 }

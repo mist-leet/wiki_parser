@@ -25,10 +25,15 @@ namespace wiki_parser
         {
             InitializeComponent();
             const string path = "url.txt";
-            string[] url;
+            string[] url = {
+                "https://ru.wikipedia.org/wiki/Perm",
+                "https://ru.wikipedia.org/wiki/Perm",
+                "https://ru.wikipedia.org/wiki/Perm",
+                "https://ru.wikipedia.org/wiki/Perm"
+            };
             try
             {
-                url = ParserUrl.urls(path);
+                //url = ParserUrl.urls(path);
                 TextBlock[] var = {
                 var_0, var_1, var_2, var_3
             };
@@ -40,12 +45,14 @@ namespace wiki_parser
                 for (int i = 0; i < var.Length; i++)
                 {
                     data[i] = new WikiData(
-                        parser_title.Parse(url[i]),
-                        parser_img.Parse(url[i])
+                        parser_title.Parse(url[i])[0],
+                        parser_img.Parse(url[i])[0]
                         );
                 }
 
-                UiInit ui = new UiInit(var, image, data);
+
+                UiInit ui = new UiInit(var, image, data, 
+                    new Parser(new ParserUrlList()).Parse("https://ru.wikipedia.org/wiki/Категория:Город"));
             }
             catch (FormatException e)
             {

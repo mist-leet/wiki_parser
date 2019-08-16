@@ -14,12 +14,14 @@ namespace wiki_parser
             {
                 s = s.Substring(start, end - start);
                 int start_1 = s.IndexOf(" - Wikipedia");
-                return s.Substring(0, start_1);
+                if (start_1 > 0)
+                    return s.Substring(0, start_1);
+                return s.Substring(0, start);
             }
             else
                 return null;
         }
-        public WikiData GetData(string url)
+        public string[] GetData(string url)
         {
             WebRequest req = WebRequest.Create(url);
             WebResponse res = req.GetResponse();
@@ -39,7 +41,7 @@ namespace wiki_parser
                     }
                 }
             }
-            return new WikiData(title, "");
-        }
+            return new [] { title };
+        }   
     }
 }

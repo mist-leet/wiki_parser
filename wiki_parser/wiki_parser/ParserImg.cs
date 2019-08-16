@@ -18,7 +18,7 @@ namespace wiki_parser
             else
                 return null;
         }
-        public WikiData GetData(string url)
+        public string[] GetData(string url)
         {
             WebRequest req = WebRequest.Create(url);
             WebResponse res = req.GetResponse();
@@ -38,7 +38,7 @@ namespace wiki_parser
                     }
                 }
             }
-            return new WikiData("", img);
+            return new[] { img };
         }
     }
 }

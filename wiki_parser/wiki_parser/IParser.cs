@@ -8,6 +8,6 @@ namespace wiki_parser
 {
     interface IParser
     {
-        WikiData GetData(string url);
+        string[] GetData(string url);
     }
 }
