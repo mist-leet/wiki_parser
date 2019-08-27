@@ -27,28 +27,51 @@ namespace wiki_parser
 
         private int[] right_ans = new int[var_n];
 
-        public UiInit(TextBlock[] var, Image image, WikiData[] data, string[] urls)
-        {
-            RightAnsInit();
+        private string[] urllist;
 
-            SetVars(var, data);
-            SetImg(image, data, new Random().Next(0, 4));
+        private TextBlock[] _var;
+        private Image _img;
+
+        public UiInit(TextBlock[] var, Image image, string[] urls)
+        {
+            for (int i = 0; i < n; i++)
+                var[i].MouseLeftButtonUp += new MouseButtonEventHandler(OnVarClick);
+
+            _var = var;
+            _img = image;
+        
+            urllist = urls;
             MakeParsedUrlList(urls);
         }
 
-        private void SetVars(TextBlock[] var, WikiData[] data)
+        private void OnVarClick(object sender, RoutedEventArgs args)
+        {
+            
+        }
+
+        private void SetSldie()
+        {
+            for (int i = 0; i < n; i++)
+                _var[i].Text = 
+        }
+
+        private void SetVars(TextBlock[] var, string[] s)
         {
             for (int i = 0; i < n; i++)
             {
-                var[i].Text = data[i].title;
+                var[i].Text = s[i];
             }
         }
-        private void SetImg(Image img, WikiData[] data, int k)
+        private void SetImg(Image img, string s, int k)
         {
-            WebClient wclient = new WebClient();
-            wclient.DownloadFile(data[k].img_url, "img.png");
+            string f_ext;
 
-            BitmapImage bm = new BitmapImage(new Uri("img.png", UriKind.Relative));
+            f_ext = "." + s.Substring(s.Length - 3, 3);
+            
+            WebClient wclient = new WebClient();
+            wclient.DownloadFile(s, "img" + f_ext);
+
+            BitmapImage bm = new BitmapImage(new Uri("img" + f_ext, UriKind.Relative));
             bm.Freeze();
             img.Source = bm;
             img.Stretch = Stretch.Uniform;

@@ -38,21 +38,11 @@ namespace wiki_parser
                 var_0, var_1, var_2, var_3
             };
 
-                Parser parser_img = new Parser(new ParserImg());
-                Parser parser_title = new Parser(new ParserTitle());
-                WikiData[] data = new WikiData[var.Length];
 
-                for (int i = 0; i < var.Length; i++)
-                {
-                    data[i] = new WikiData(
-                        parser_title.Parse(url[i])[0],
-                        parser_img.Parse(url[i])[0]
-                        );
-                }
-
-
-                UiInit ui = new UiInit(var, image, data, 
-                    new Parser(new ParserUrlList()).Parse("https://ru.wikipedia.org/wiki/Категория:Город"));
+                UiInit ui = new UiInit(
+                    var, image,
+                    new Parser(new ParserUrlList())
+                        .Parse("https://ru.wikipedia.org/wiki/Категория:Растения_по_алфавиту"));
             }
             catch (FormatException e)
             {

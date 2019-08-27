@@ -8,17 +8,16 @@ namespace wiki_parser
 {
     class WikiData
     {
-        public string title;
-        public string img_url;
-        public WikiData(string a, string b)
-        {
-            title = a;
-            img_url = b;
+        public string[] title;
+        public string[] img_url;
+        public WikiData(string[] urls)
+        {   
+            for(int i = 0; i < 4; i++)
+            {
+                Array.Resize<string>(ref title, title.Length + 1);
+                title[i] = ParserTitle.GetData(urls[i])[0];
+                s
+            }
+            
         }
-        public WikiData(WikiData a, WikiData b)
-        {
-            title = a.title;
-            img_url = b.img_url;
-        }
-    }
 }
