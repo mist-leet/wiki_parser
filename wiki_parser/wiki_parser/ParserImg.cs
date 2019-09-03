@@ -30,11 +30,13 @@ namespace wiki_parser
                 using (StreamReader reader = new StreamReader(stream))
                 {
                     string line = "";
-                    while ((line = reader.ReadLine()) != null
-                            || img == "")
+                    while ((line = reader.ReadLine()) != null)
                     {
-                        if (FindPicUrl(line) != null && img == "")
+                        if (FindPicUrl(line) != null)
+                        {
                             img = FindPicUrl(line);
+                            break;
+                        }
                     }
                 }
             }

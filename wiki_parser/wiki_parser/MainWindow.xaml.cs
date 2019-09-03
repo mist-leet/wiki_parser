@@ -41,8 +41,8 @@ namespace wiki_parser
 
                 UiInit ui = new UiInit(
                     var, image,
-                    new Parser(new ParserUrlList())
-                        .Parse("https://ru.wikipedia.org/wiki/Категория:Растения_по_алфавиту"));
+                    new ParserUrlList()
+                        .GetData("https://ru.wikipedia.org/wiki/Категория:Растения_по_алфавиту"));
             }
             catch (FormatException e)
             {
