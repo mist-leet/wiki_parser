@@ -18,6 +18,7 @@ namespace wiki_parser
             else
                 return null;
         }
+
         public string[] GetData(string url)
         {
             WebRequest req = WebRequest.Create(url);

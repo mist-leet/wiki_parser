@@ -16,10 +16,10 @@ namespace wiki_parser
                 int start_1 = s.IndexOf(" - Wikipedia");
                 int start_2 = s.IndexOf(" — Википедия");
                 if (start_1 + start_2 > 0)
-                    return s.Substring(0, start_1 + start_2);
+                    return s.Substring(0, start_1 + start_2 + 1);
                 else
 
-                return s.Substring(0, start);
+                return s.Substring(0, start + 1);
             }
             else
                 return null;

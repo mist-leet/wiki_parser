@@ -37,19 +37,19 @@ namespace wiki_parser
                 title[i] = new ParserTitle().GetData(url_list[r[i]])[0];
                 img_url[i] = new ParserImg().GetData(url_list[r[i]])[0];
             }
-            for (int i = 0; i < 4; i++) 
+            int correct_elements = 0;
+            while (correct_elements < 4)
             {
-                if (title[i] == null || title[i] == "")
-                    ReDoElement(ref title, new ParserTitle(), i);
-                if (img_url[i] == null || img_url[i] == "")
-                    ReDoElement(ref img_url, new ParserImg(), i);
+                if (title[correct_elements] == null || img_url[correct_elements] == null ||
+                    title[correct_elements] == "" || img_url[correct_elements] == "")
+                {
+                    int q = GetRandomNumber(r, url_list.Length);
+                    title[correct_elements]   = new ParserTitle().GetData(url_list[q])[0];
+                    img_url[correct_elements] = new ParserImg().GetData(url_list[q])[0];
+                }
+                else
+                    correct_elements++;
             }
-        }
-
-        private void ReDoElement(ref string[] arr, IParser parser, int i)
-        {
-            Array.Resize<string>(ref arr, arr.Length + 1);
-            arr[i] = parser.GetData(url_list[GetRandomNumber(r, i, url_list.Length)])[0];
         }
 
         private bool CheckRandom(int[] r)
@@ -77,7 +77,7 @@ namespace wiki_parser
             return r;
         }
 
-        private int GetRandomNumber(int[] r, int k, int maxValue)
+        private int GetRandomNumber(int[] r, int maxValue)
         {
             while (true)
             {

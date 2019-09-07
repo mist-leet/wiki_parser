@@ -14,35 +14,50 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Net;
 using System.IO;
-using System.Threading.Tasks;
+
 
 namespace wiki_parser
 {
     public partial class MainWindow : Window
     {
+        private enum Categories : int
+        {
+            Cities = 0,
+            CultBuildings,
+            Contry,
+            Parks,
+            Gods,
+            EthnicGroups,
+            Plants,
+            Mushrooms
 
+        }
+
+        private string[] categories = new string[]
+        {
+            "https://ru.wikipedia.org/wiki/Категория:Населённые_пункты_по_алфавиту",
+            "https://ru.wikipedia.org/wiki/Категория:Культовые_сооружения_по_алфавиту",
+            "https://ru.wikipedia.org/wiki/Категория:Государства_по_алфавиту",
+            "https://ru.wikipedia.org/wiki/Категория:Сады_и_парки_по_алфавиту",
+            "https://ru.wikipedia.org/wiki/Категория:Боги_по_алфавиту",
+            "https://ru.wikipedia.org/wiki/Категория:Этнические_группы_по_алфавиту",
+            "https://ru.wikipedia.org/wiki/Категория:Растения_по_алфавиту",
+            "https://ru.wikipedia.org/wiki/Категория:Грибы_по_алфавиту"
+        };
         public MainWindow()
         {
             InitializeComponent();
-            const string path = "url.txt";
-            string[] url = {
-                "https://ru.wikipedia.org/wiki/Perm",
-                "https://ru.wikipedia.org/wiki/Perm",
-                "https://ru.wikipedia.org/wiki/Perm",
-                "https://ru.wikipedia.org/wiki/Perm"
-            };
             try
             {
-                //url = ParserUrl.urls(path);
                 TextBlock[] var = {
                 var_0, var_1, var_2, var_3
             };
 
-
                 UiInit ui = new UiInit(
                     var, image,
                     new ParserUrlList()
-                        .GetData("https://ru.wikipedia.org/wiki/Категория:Растения_по_алфавиту"));
+                        .GetData(categories[(int)Categories.EthnicGroups]));
+                
             }
             catch (FormatException e)
             {

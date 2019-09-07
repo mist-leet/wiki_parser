@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:wiki_parser"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
-   
+
     <Grid x:Name="MainGrid" ShowGridLines="True">
         <Grid.RowDefinitions>
             <RowDefinition Height="2.5*"/>
@@ -32,6 +32,8 @@
             <TextBlock x:Name="var_1" Grid.Row="0" Grid.Column="1"/>
             <TextBlock x:Name="var_2" Grid.Row="1" Grid.Column="0"/>
             <TextBlock x:Name="var_3" Grid.Row="1" Grid.Column="1"/>
+            
+            
         </Grid>
     </Grid>
 </Window>
