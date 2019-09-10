@@ -18,6 +18,10 @@ namespace wiki_parser
 
         private const int n = 4;
 
+        /// <summary>
+        /// Creating a WikiData instance
+        /// </summary>
+        /// <param name="urls"> array of links to chose </param>
         public WikiData(string[] urls)
         {
             title    = new string[] { };
@@ -52,6 +56,11 @@ namespace wiki_parser
             }
         }
 
+        /// <summary>
+        /// Check is all elements different
+        /// </summary>
+        /// <param name="r"> array to check </param>
+        /// <returns>true if different, false if not</returns>
         private bool CheckRandom(int[] r)
         {
             for (int i = 0; i < r.Length; i++)
@@ -64,6 +73,11 @@ namespace wiki_parser
             return true;
         }
 
+        /// <summary>
+        /// Create an array of 4 random integer value from 0 to maxValue
+        /// </summary>
+        /// <param name="maxValue"> max value in array</param>
+        /// <returns>array of random numbers</returns>
         private int[] MakeRandomList(int maxValue)
         {
             Random rnd = new Random();
@@ -77,6 +91,12 @@ namespace wiki_parser
             return r;
         }
 
+        /// <summary>
+        /// Get random number which is not in r
+        /// </summary>
+        /// <param name="r"></param>
+        /// <param name="maxValue">max value in r</param>
+        /// <returns>random number</returns>
         private int GetRandomNumber(int[] r, int maxValue)
         {
             while (true)

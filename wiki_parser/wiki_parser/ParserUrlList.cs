@@ -12,15 +12,16 @@ namespace wiki_parser
     {
         public bool is_only_russian = true;
 
+        /// <summary>
+        /// Get all links from url, and all links from categories in url
+        /// </summary>
+        /// <param name="url"> url to find links </param>
+        /// <returns>string array of links </returns>
         public string[] GetData(string url)
         {
-            //string[] categories = GetCategoryUrl(url);
             string[] categories = GetCategorySpecialUrl(url);
             var urls = new List<string>();
 
-            //if (categories.Length == 0)
-            //    categories = GetCategorySpecialUrl(url);
-            
 
             foreach (string _url in categories)
             {
@@ -61,6 +62,11 @@ namespace wiki_parser
             return urls.Select(u => $"https://ru.wikipedia.org{u}").ToArray();
         }
 
+        /// <summary>
+        /// Get links to a categories in url
+        /// </summary>
+        /// <param name="url"> page to find </param>
+        /// <returns>array of links to categories</returns>
         private string[] GetCategoryUrl(string url)
         {
             var urls = new List<string>();
@@ -94,6 +100,11 @@ namespace wiki_parser
             return urls.ToArray();
         }
 
+        /// <summary>
+        /// Get links to a categories in url
+        /// </summary>
+        /// <param name="url"> page to find </param>
+        /// <returns>array of links to categories</returns>
         private string[] GetCategorySpecialUrl(string url)
         {
             var urls = new List<string>();

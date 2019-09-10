@@ -29,11 +29,17 @@ namespace wiki_parser
         private string[] _urllist;
         private int _current_img_name = 0;
 
-        private TextBlock[] _var;
+        private TextBox[] _var;
         private Image _img;
         private WikiData _current_data;
 
-        public UiInit(TextBlock[] var, Image image, string[] urls)
+        /// <summary>
+        /// Create main UI
+        /// </summary>
+        /// <param name="var">TextBoxes to choose answers in MainWindow</param>
+        /// <param name="image">Image in MainWindow</param>
+        /// <param name="urls">Array of links for a game</param>
+        public UiInit(TextBox[] var, Image image, string[] urls)
         {
             _var = var;
             _img = image;
@@ -47,10 +53,15 @@ namespace wiki_parser
             SetSldie(_right_ans[_current_q]);
         }
 
+        /// <summary>
+        /// Event on mouse click on variant
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="args"></param>
         private void OnVarClick(object sender, RoutedEventArgs args)
         {
             if (_current_data.title[_right_ans[_current_q]] ==
-             ((TextBlock)sender).Text)
+             ((TextBox)sender).Text)
                 MessageBox.Show("You were right!");
             else
                 MessageBox.Show("You were wrong!" + " No, it was \n " +
@@ -60,6 +71,10 @@ namespace wiki_parser
             SetSldie(_right_ans[_current_q]);
         }
 
+        /// <summary>
+        /// Show 4 variants to answer and a picture
+        /// </summary>
+        /// <param name="k">Current right answer</param>
         private void SetSldie(int k)
         {
             _current_data = new WikiData(_urllist);
@@ -67,7 +82,12 @@ namespace wiki_parser
                 _var[i].Text = _current_data.title[i];
             _img.Source = GetImage(_current_data.img_url[k]);
         }
-                  
+        
+        /// <summary>
+        /// Download an image from link and transform in BitmapImage
+        /// </summary>
+        /// <param name="s">link to image</param>
+        /// <returns>BitmapImage picture</returns>
         private BitmapImage GetImage(string s)
         {
             string f_ext;
@@ -99,6 +119,9 @@ namespace wiki_parser
             }
         }
 
+        /// <summary>
+        /// Initialize right answer list
+        /// </summary>
         private void RightAnsInit()
         {
             Random rnd = new Random();

@@ -20,6 +20,9 @@ namespace wiki_parser
 {
     public partial class MainWindow : Window
     {
+        /// <summary>
+        ///  Aviable categories
+        /// </summary>
         private enum Categories : int
         {
             Cities = 0,
@@ -33,6 +36,9 @@ namespace wiki_parser
 
         }
 
+        /// <summary>
+        /// Linqs to wiki categories
+        /// </summary>
         private string[] categories = new string[]
         {
             "https://ru.wikipedia.org/wiki/Категория:Населённые_пункты_по_алфавиту",
@@ -44,15 +50,16 @@ namespace wiki_parser
             "https://ru.wikipedia.org/wiki/Категория:Растения_по_алфавиту",
             "https://ru.wikipedia.org/wiki/Категория:Грибы_по_алфавиту"
         };
+
         public MainWindow()
         {
             InitializeComponent();
             try
             {
-                TextBlock[] var = {
+                TextBox[] var = {
                 var_0, var_1, var_2, var_3
             };
-
+                
                 UiInit ui = new UiInit(
                     var, image,
                     new ParserUrlList()

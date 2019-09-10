@@ -7,18 +7,36 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
 
-    <Grid x:Name="MainGrid" ShowGridLines="True">
+    <Window.Resources>
+        <ControlTemplate TargetType="TextBox" x:Key="vars" x:Name="vars_temaplate">
+            <Border BorderBrush="#5c5c5c"
+                    BorderThickness="2" 
+                    Background="#ffffff"
+                    Margin="1">
+                <ContentControl 
+                                Background="#f2f2f2"
+                                FontSize="35"
+                                FontFamily="Roboto"
+                                VerticalAlignment="Center" HorizontalAlignment="Center"  
+                                Foreground="#2e2e2e"
+                    Content="{TemplateBinding Text}"
+                />
+            </Border>
+        </ControlTemplate>
+
+    </Window.Resources>    
+    <Grid x:Name="MainGrid">
         <Grid.RowDefinitions>
             <RowDefinition Height="2.5*"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <Grid x:Name="ImgGrid" Grid.Row="0" ShowGridLines="True">
+        <Grid x:Name="ImgGrid" Grid.Row="0">
             <Image x:Name="image"/>
         </Grid>
 
 
-        <Grid x:Name="TitleGrid" Grid.Row="1" ShowGridLines="True">
+        <Grid x:Name="TitleGrid" Grid.Row="1">
             <Grid.RowDefinitions>
                 <RowDefinition/>
                 <RowDefinition/>
@@ -28,12 +46,16 @@
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
 
-            <TextBlock x:Name="var_0" Grid.Row="0" Grid.Column="0"/>
-            <TextBlock x:Name="var_1" Grid.Row="0" Grid.Column="1"/>
-            <TextBlock x:Name="var_2" Grid.Row="1" Grid.Column="0"/>
-            <TextBlock x:Name="var_3" Grid.Row="1" Grid.Column="1"/>
-            
-            
+            <TextBox x:Name="var_0" Grid.Row="0" Grid.Column="0"
+                     Template="{StaticResource vars}"/>
+            <TextBox x:Name="var_1" Grid.Row="0" Grid.Column="1"
+                      Template="{StaticResource vars}"/>
+            <TextBox x:Name="var_2" Grid.Row="1" Grid.Column="0"
+                      Template="{StaticResource vars}"/>
+            <TextBox x:Name="var_3" Grid.Row="1" Grid.Column="1"
+                      Template="{StaticResource vars}"/>
+
+
         </Grid>
     </Grid>
 </Window>

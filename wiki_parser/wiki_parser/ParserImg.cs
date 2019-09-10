@@ -6,6 +6,11 @@ namespace wiki_parser
 {
     class ParserImg : IParser
     {
+        /// <summary>
+        /// Search a link to a picture in string
+        /// </summary>
+        /// <param name="s"> string to check </param>
+        /// <returns> link to a picture or null if there isn't </returns>
         private string FindPicUrl(string s)
         {
             int start = s.IndexOf("https://upload.wikimedia.org/");
@@ -19,6 +24,11 @@ namespace wiki_parser
                 return null;
         }
 
+        /// <summary>
+        /// Connect to url and find link to the first picture
+        /// </summary>
+        /// <param name="url"> link to page to find a picture </param>
+        /// <returns></returns>
         public string[] GetData(string url)
         {
             WebRequest req = WebRequest.Create(url);

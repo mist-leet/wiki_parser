@@ -6,6 +6,11 @@ namespace wiki_parser
 {
     class ParserTitle : IParser
     {
+        /// <summary>
+        /// Find title tag
+        /// </summary>
+        /// <param name="s"> string to check </param>
+        /// <returns>value of title tag</returns>
         private string FindName(string s)
         {
             int start = s.IndexOf("<title>") + 7;
@@ -25,6 +30,11 @@ namespace wiki_parser
                 return null;
         }
 
+        /// <summary>
+        /// Connect to url and find title value
+        /// </summary>
+        /// <param name="url"> link to page to find </param>
+        /// <returns> title value </returns>
         public string[] GetData(string url)
         {
             WebRequest req = WebRequest.Create(url);
